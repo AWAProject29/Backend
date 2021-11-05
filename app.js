@@ -3,10 +3,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var customerRouter = require('./routes/customer');
+var managerRouter = require('./routes/manager');
+var menuRouter = require('./routes/menu');
+var orderRouter = require('./routes/order');
+var restaurantRouter = require('./routes/restaurant');
 
 var app = express();
+
+
+//BasicAuth or some other authentication 
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -14,7 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/customer', customerRouter);
+app.use('/manager', managerRouter);
+app.use('/menu', menuRouter);
+app.use('/order', orderRouter);
+app.use('/restaurant', restaurantRouter);
 
 module.exports = app;

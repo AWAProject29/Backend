@@ -1,3 +1,3 @@
 const express = require('express');
 const router = express.Router();
-const kortti = require('../models/menu_model');
+const menu = require('../models/menu_model');

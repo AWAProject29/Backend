@@ -1,3 +1,3 @@
 const express = require('express');
 const router = express.Router();
-const kortti = require('../models/order_model');
+const order = require('../models/order_model');

@@ -3,11 +3,11 @@ const db = require('../database');
 const customer = {
 
     getById: function(id, callback) {
-      return db.query('select * from asiakas where id_asiakas=?', [id], callback);
+      return db.query('select * from customer where idcustomer=?', [id], callback);
     },
 
     getAll: function(callback) {
-        return db.query('SELECT * from customer');
+        return db.query('SELECT * from customer', callback);
     },
 
     add: function(customer, callback) {
@@ -18,12 +18,12 @@ const customer = {
     },
 
     delete: function(id, callback) {
-        return db.query('delete from customer where id_customer=?', [id], callback);
+        return db.query('delete from customer where idcustomer=?', [id], callback);
       },
 
     update: function(id, customer, callback) {
         return db.query(
-          'update customer set firstname=?,lastname=?, email=?, password=? where id_asiakas=?',
+          'update customer set firstname=?,lastname=?, email=?, password=? where idcustomer=?',
           [customer.etunimi, customer.lastname, customer.email, customer.password, id], callback
         );
     },
@@ -31,8 +31,8 @@ const customer = {
     //AddCustomer procedure work in progress.
     AddCustomer: function(procedure_params, callback) {
         return db.query(
-          'CALL AddCustomer (?,?)',
-          [procedure_params.id,],
+          'CALL AddCustomer (?,?,?,?)',
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.pw],
           callback
         );
 

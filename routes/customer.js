@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const customer = require('../models/customer_model');
 
-//Get all customers
+//Get customer by id
 router.get('/:id?',
  function(request, response) {
   if (request.params.id) {
@@ -10,11 +10,10 @@ router.get('/:id?',
       if (err) {
         response.json(err);
       } else {
-          
         response.json(dbResult[0]);
       }
     });
-
+//Get all customers
     } else {
     customer.getAll(function(err, dbResult) {
       if (err) {
@@ -27,7 +26,7 @@ router.get('/:id?',
 });
 
 //Add customer
-router.post('/', 
+router.post('/addCustomer', 
 function(request, response) {
   customer.add(request.body, function(err, dbResult) {
     if (err) {

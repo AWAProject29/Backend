@@ -38,7 +38,7 @@ function(request, response) {
 });
 
 //Delete customer
-router.delete('/:id', 
+router.delete('delete/:id', 
 function(request, response) {
   customer.delete(request.params.id, function(err, dbResult) {
     if (err) {
@@ -50,7 +50,7 @@ function(request, response) {
 });
 
 //Update customer
-router.put('/:id', 
+router.put('update/:id', 
 function(request, response) {
   customer.update(request.params.id, request.body, function(err, dbResult) {
     if (err) {

@@ -28,7 +28,7 @@ const customer = {
         );
     },
 
-    //AddCustomer procedure work in progress.
+    //AddCustomer procedure
     AddCustomer: function(procedure_params, callback) {
         return db.query(
           'CALL AddCustomer (?,?,?,?)',

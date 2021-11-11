@@ -58,10 +58,10 @@ function(request, response) {
     } else {
       console.log(dbResult);
       if(dbResult.affectedRows==1){
-        response.json("customer päivitetty.");
+        response.json("customer updated.");
       }
       else{
-        response.json("customerta ei ole olemassa.");
+        response.json("customer does not exist.");
       }
 
     }

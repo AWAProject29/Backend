@@ -33,7 +33,7 @@ function(request, response) {
     if (err) {
       response.json(err);
     } else {
-      response.json("Added a manager.");
+      response.json(request.body);
     }
   });
 });

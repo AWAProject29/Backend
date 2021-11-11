@@ -59,7 +59,7 @@ CREATE TABLE `manager` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL DEFAULT 'abc123',
   `managerauthentication` varchar(45) NOT NULL,
   PRIMARY KEY (`idmanager`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -139,8 +139,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idshoppingcart` int(11) NOT NULL,
-  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\n\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
-  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\nPreparing order\\nReady for delivery\\nDelivering\\nDelivered',
+  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\n\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
+  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\nPreparing order\\\\nReady for delivery\\\\nDelivering\\\\nDelivered',
   `deliverylocation` varchar(45) DEFAULT NULL,
   `cost` float DEFAULT NULL,
   PRIMARY KEY (`idorder`),
@@ -281,7 +281,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addCustomer`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addCustomer`(
 	IN idcustomer INT,
     IN idorder INT,
 	IN firstname VARCHAR(45),
@@ -307,7 +307,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addManager`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
 	IN idmanager INT,
     IN idrestaurant INT,
     IN idorder INT,
@@ -317,7 +317,7 @@ CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addManager`(
 	IN pw VARCHAR(45),
     IN managerauthentication VARCHAR(45)
 )
-INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication); ;;
+INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -333,7 +333,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addRestaurant`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addRestaurant`(
 	IN idrestaurant INT,
     IN idmenu INT,
     IN restaurantname VARCHAR(45),
@@ -345,7 +345,7 @@ CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addRestaurant`(
     IN restaurantdescription VARCHAR(200)
 )
 INSERT INTO restaurant VALUES (idrestaurant, idmenu, restaurantname, address, restauranttype, 
-    pricelevel, operatinghours, restaurantimage, restaurantdescription); ;;
+    pricelevel, operatinghours, restaurantimage, restaurantdescription) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -361,10 +361,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `searchRestaurant`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `searchRestaurant`(
 	IN searchstring VARCHAR(45)
 )
-SELECT * FROM restaurant WHERE restaurantname LIKE CONCAT('%', searchstring, '%') OR address LIKE CONCAT('%', searchstring, '%') OR restauranttype LIKE CONCAT('%', searchstring, '%'); ;;
+SELECT * FROM restaurant WHERE restaurantname LIKE CONCAT('%', searchstring, '%') OR address LIKE CONCAT('%', searchstring, '%') OR restauranttype LIKE CONCAT('%', searchstring, '%') ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -380,7 +380,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showCustomers`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showCustomers`()
 BEGIN
     SELECT *  FROM Customer;
 END ;;
@@ -399,7 +399,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showManagers`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showManagers`()
 BEGIN
     SELECT *  FROM manager;
 END ;;
@@ -418,7 +418,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showRestaurants`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showRestaurants`()
 BEGIN
     SELECT *  FROM restaurant;
 END ;;
@@ -437,4 +437,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-10 14:45:46
+-- Dump completed on 2021-11-11 11:43:25

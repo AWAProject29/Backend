@@ -10,13 +10,6 @@ const manager = {
         return db.query('SELECT * from manager', callback);
     },
 
-    add: function(manager, callback) {
-        return db.query(
-            'insert into manager (firstname,lastname,email,password) values(?,?,?,?)',
-            [manager.firstname, manager.lastname, manager.email, manager.password], callback
-        );
-    },
-
     delete: function(id, callback) {
         return db.query('delete from manager where idmanager=?', [id], callback);
       },
@@ -26,8 +19,26 @@ const manager = {
           'update manager set firstname=?,lastname=?, email=?, password=? where idmanager=?',
           [manager.etunimi, manager.lastname, manager.email, manager.password, id], callback
         );
-    }
+    },
 
-};
+      //AddManager procedure
+      AddManager: function(procedure_params, callback) {
+        return db.query(
+          'CALL AddManager (?,?,?,?,?)',
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.pw, procedure_params.managerauthentication],
+          callback
+          
+        );
+      },
+
+      //Show Manager procedure
+      ShowManager: function(callback) {
+        return db.query(
+          'CALL ShowManager()', callback
+        )
+      }
+
+
+}
 
 module.exports = manager;

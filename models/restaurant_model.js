@@ -12,8 +12,8 @@ const restaurant = {
   
       add: function(restaurant, callback) {
           return db.query(
-              'insert into restaurant (name, address, type, pricelevel, operatinghours, restaurantdescription) values(?,?,?,?,?,?)',
-              [restaurant.name, restaurant.address, restaurant.type, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription], callback
+              'insert into restaurant (restaurantname, address, restauranttype, pricelevel, operatinghours, restaurantdescription) values(?,?,?,?,?,?)',
+              [restaurant.restaurantname, restaurant.address, restaurant.restauranttype, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription], callback
           );
       },
   
@@ -23,11 +23,35 @@ const restaurant = {
   
       update: function(id, restaurant, callback) {
           return db.query(
-            'update restaurant set name=?, address=?, type=?, pricelevel=?, operatinghours=?, restaurantdescription=? where idrestaurant=?',
-            [restaurant.name, restaurant.address, restaurant.type, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription, id], callback
+            'update restaurant set restaurantname=?, address=?, restauranttype=?, pricelevel=?, operatinghours=?, restaurantdescription=? where idrestaurant=?',
+            [restaurant.restaurantname, restaurant.address, restaurant.restauranttype, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription, id], callback
           );
       },
 
+
+    //Add restaurant procedure
+    AddRestaurant: function(procedure_params, callback) {
+        return db.query(
+          'CALL AddRestaurant (?,?,?,?,?,?)',
+          [procedure_params.restaurantname, procedure_params.address, procedure_params.restauranttype, procedure_params.pricelevel, procedure_params.operatinghours, procedure_params.restaurantdescription],
+          callback
+        );
+    },
+
+    //Search Restaurants procedure
+    SearchRestaurant: function(procedure_params, callback){
+          return db.query(
+              'Call SearchRestaurant(?)',
+              [procedure_params.searchstring, callback]
+          );
+    },
+
+    //Show Restaurant procedure
+         ShowRestaurants: function(callback) {
+            return db.query(
+              'CALL ShowRestaurants()', callback
+            )
+    }
 }
 
 module.exports = restaurant;

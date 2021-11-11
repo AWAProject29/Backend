@@ -10,6 +10,12 @@ const manager = {
         return db.query('SELECT * from manager', callback);
     },
 
+    add: function(procedure_params, callback) {
+      return db.query('CALL addManager (?,?,?,?,?)',
+      [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.pw, procedure_params.managerauthentication],
+      callback)
+    },
+
     delete: function(id, callback) {
         return db.query('delete from manager where idmanager=?', [id], callback);
       },
@@ -22,17 +28,17 @@ const manager = {
     },
 
       //AddManager procedure
-      AddManager: function(procedure_params, callback) {
+      addManager: function(procedure_params, callback) {
         return db.query(
-          'CALL AddManager (?,?,?,?,?)',
-          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.pw, procedure_params.managerauthentication],
+          'CALL addManager (?,?,?,?,?)',
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password, procedure_params.managerauthentication],
           callback
           
         );
       },
 
       //Show Manager procedure
-      ShowManager: function(callback) {
+      showManager: function(callback) {
         return db.query(
           'CALL ShowManager()', callback
         )

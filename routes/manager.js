@@ -29,7 +29,7 @@ router.get('/:id?',
 //Add manager
 router.post('/addmanager', 
 function(request, response) {
-  manager.add(request.body, function(err, dbResult) {
+  manager.addManager(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {

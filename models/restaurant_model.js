@@ -30,10 +30,10 @@ const restaurant = {
 
 
     //Add restaurant procedure
-    AddRestaurant: function(procedure_params, callback) {
+    addRestaurant: function(procedure_params, callback) {
         return db.query(
-          'CALL AddRestaurant (?,?,?,?,?,?)',
-          [procedure_params.restaurantname, procedure_params.address, procedure_params.restauranttype, procedure_params.pricelevel, procedure_params.operatinghours, procedure_params.restaurantdescription],
+          'CALL addRestaurant (?,?,?,?,?,?,?)',
+          [procedure_params.restaurantname, procedure_params.address, procedure_params.restauranttype, procedure_params.pricelevel, procedure_params.operatinghours, procedure_params.restaurantimage, procedure_params.restaurantdescription],
           callback
         );
     },

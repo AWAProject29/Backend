@@ -38,11 +38,11 @@ const customer = {
     },
 
     //Show Customer procedure
-    ShowCustomer: function(callback) {
-      return db.query(
-        'CALL ShowCustomer()', callback
-      )
-    }
+    // ShowCustomer: function(callback) {
+    //   return db.query(
+    //     'CALL ShowCustomer()', callback
+    //   )
+    // }
 };
 
 

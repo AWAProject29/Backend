@@ -37,12 +37,12 @@ const manager = {
         );
       },
 
-      //Show Manager procedure
-      showManager: function(callback) {
-        return db.query(
-          'CALL ShowManager()', callback
-        )
-      }
+      // //Show Manager procedure
+      // showManager: function(callback) {
+      //   return db.query(
+      //     'CALL ShowManager()', callback
+      //   )
+      // }
 
 
 }

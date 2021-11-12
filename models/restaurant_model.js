@@ -7,7 +7,7 @@ const restaurant = {
       },
   
       getAll: function(callback) {
-          return db.query('SELECT * from restaurant', callback);
+          return db.query('Select * from restaurant', callback);
       },
   
       add: function(restaurant, callback) {
@@ -39,19 +39,17 @@ const restaurant = {
     },
 
     //Search Restaurants procedure
-    SearchRestaurant: function(procedure_params, callback){
-          return db.query(
-              'Call SearchRestaurant(?)',
-              [procedure_params.searchstring, callback]
-          );
-    },
+    // searchRestaurant: function(procedure_params, callback){
+    //       return db.query(
+    //           'Call searchRestaurant(?)',
+    //           [procedure_params.searchstring, callback]
+    //       );
+    // },
 
-    //Show Restaurant procedure
-         ShowRestaurants: function(callback) {
-            return db.query(
-              'CALL ShowRestaurants()', callback
-            )
-    }
+    // //Show Restaurant procedure
+    // showRestaurants: function(callback) {
+    //        return db.query('CALL showRestaurants()', callback);
+    // }
 }
 
 module.exports = restaurant;

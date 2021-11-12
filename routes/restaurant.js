@@ -25,10 +25,25 @@ router.get('/:id?',
   }
 });
 
+//Show restaurants
+router.get('/showRestaurants', 
+function(request, response) {
+  restaurant.showRestaurant(request.body, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult);
+    }
+  });
+});
+  
+
+
+
 //Add restaurant
 router.post('/addrestaurant', 
 function(request, response) {
-  restaurant.add(request.body, function(err, dbResult) {
+  restaurant.addRestaurant(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
@@ -36,6 +51,7 @@ function(request, response) {
     }
   });
 });
+
 
 //Delete restaurant
 router.delete('delete/:id', 

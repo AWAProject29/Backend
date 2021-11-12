@@ -308,16 +308,13 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
-	IN idmanager INT,
-    IN idrestaurant INT,
-    IN idorder INT,
 	IN firstname VARCHAR(45),
 	IN lastname VARCHAR(45),
 	IN email VARCHAR(45),
 	IN pw VARCHAR(45),
     IN managerauthentication VARCHAR(45)
 )
-INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication) ;;
+INSERT INTO manager VALUES ( firstname, lastname, email, pw, managerauthentication) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;

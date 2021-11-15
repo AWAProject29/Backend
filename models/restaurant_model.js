@@ -3,27 +3,27 @@ const db = require('../database');
 const restaurant = {
 
     getById: function(id, callback) {
-        return db.query('select * from restaurant where idrestaurant=?', [id], callback);
+        return db.query('SELECT * FROM restaurant WHERE idrestaurant=?', [id], callback);
       },
   
       getAll: function(callback) {
-          return db.query('Select * from restaurant', callback);
+          return db.query('SELECT * FROM restaurant', callback);
       },
   
       add: function(restaurant, callback) {
           return db.query(
-              'insert into restaurant (restaurantname, address, restauranttype, pricelevel, operatinghours, restaurantdescription) values(?,?,?,?,?,?)',
+              'insert INTO restaurant (restaurantname, address, restauranttype, pricelevel, operatinghours, restaurantdescription) VALUES(?,?,?,?,?,?)',
               [restaurant.restaurantname, restaurant.address, restaurant.restauranttype, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription], callback
           );
       },
   
       delete: function(id, callback) {
-          return db.query('delete from restaurant where idrestaurant=?', [id], callback);
+          return db.query('DELETE FROM restaurant WHERE idrestaurant=?', [id], callback);
         },
   
       update: function(id, restaurant, callback) {
           return db.query(
-            'update restaurant set restaurantname=?, address=?, restauranttype=?, pricelevel=?, operatinghours=?, restaurantdescription=? where idrestaurant=?',
+            'UPDATE restaurant SET restaurantname=?, address=?, restauranttype=?, pricelevel=?, operatinghours=?, restaurantdescription=? WHERE idrestaurant=?',
             [restaurant.restaurantname, restaurant.address, restaurant.restauranttype, restaurant.pricelevel, restaurant.operatinghours, restaurant.restaurantdescription, id], callback
           );
       },

@@ -3,11 +3,11 @@ const db = require('../database');
 const manager = {
 
     getById: function(id, callback) {
-      return db.query('select * from manager where idmanager=?', [id], callback);
+      return db.query('SELECT * FROM manager where idmanager=?', [id], callback);
     },
 
     getAll: function(callback) {
-        return db.query('SELECT * from manager', callback);
+        return db.query('SELECT * FROM manager', callback);
     },
 
     add: function(procedure_params, callback) {
@@ -17,13 +17,13 @@ const manager = {
     },
 
     delete: function(id, callback) {
-        return db.query('delete from manager where idmanager=?', [id], callback);
+        return db.query('DELETE FROM manager WHERE idmanager=?', [id], callback);
       },
 
     update: function(id, manager, callback) {
         return db.query(
-          'update manager set firstname=?,lastname=?, email=?, password=? where idmanager=?',
-          [manager.etunimi, manager.lastname, manager.email, manager.password, id], callback
+          'UPDATE manager SET firstname=?,lastname=?, email=?, password=? WHERE idmanager=?',
+          [manager.firstname, manager.lastname, manager.email, manager.password, id], callback
         );
     },
 

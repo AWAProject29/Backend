@@ -3,11 +3,11 @@ const db = require('../database');
 const customer = {
 
     getById: function(id, callback) {
-      return db.query('select * from customer where idcustomer=?', [id], callback);
+      return db.query('SELECT * FROM customer WHERE idcustomer=?', [id], callback);
     },
 
     getAll: function(callback) {
-        return db.query('SELECT * from customer', callback);
+        return db.query('SELECT * FROM customer', callback);
     },
 
     // add: function(customer, callback) {
@@ -18,21 +18,21 @@ const customer = {
     // },
 
     delete: function(id, callback) {
-        return db.query('delete from customer where idcustomer=?', [id], callback);
+        return db.query('DELETE FROM customer WHERE idcustomer=?', [id], callback);
       },
 
     update: function(id, customer, callback) {
         return db.query(
-          'update customer set firstname=?,lastname=?, email=?, password=? where idcustomer=?',
-          [customer.etunimi, customer.lastname, customer.email, customer.password, id], callback
+          'UPDATE customer SET firstname=?,lastname=?, email=?, password=? WHERE idcustomer=?',
+          [customer.firstname, customer.lastname, customer.email, customer.password, id], callback
         );
     },
 
     //AddCustomer procedure
-    AddCustomer: function(procedure_params, callback) {
+    addCustomer: function(procedure_params, callback) {
         return db.query(
-          'CALL AddCustomer (?,?,?,?)',
-          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.pw],
+          'CALL addCustomer (?,?,?,?)',
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password],
           callback
         );
     },

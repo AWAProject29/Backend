@@ -28,7 +28,7 @@ router.get('/:id?',
 //Add customer
 router.post('/addCustomer', 
 function(request, response) {
-  customer.add(request.body, function(err, dbResult) {
+  customer.addCustomer(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {

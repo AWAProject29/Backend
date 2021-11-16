@@ -23,16 +23,16 @@ const customer = {
 
     update: function(id, customer, callback) {
         return db.query(
-          'UPDATE customer SET firstname=?,lastname=?, email=?, password=? WHERE idcustomer=?',
-          [customer.firstname, customer.lastname, customer.email, customer.password, id], callback
+          'UPDATE customer SET firstname=?,lastname=?, email=?, password=?, address=? WHERE idcustomer=?',
+          [customer.firstname, customer.lastname, customer.email, customer.password, customer.address, id], callback
         );
     },
 
     //AddCustomer procedure
     addCustomer: function(procedure_params, callback) {
         return db.query(
-          'CALL addCustomer (?,?,?,?)',
-          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password],
+          'CALL addCustomer (?,?,?,?,?)',
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password, procedure_params.address],
           callback
         );
     },

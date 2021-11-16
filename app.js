@@ -11,8 +11,14 @@ var restaurantRouter = require('./routes/restaurant');
 
 var app = express();
 
+const port = 4000
+
 
 //BasicAuth or some other authentication 
+
+app.listen(port, () => {
+    console.log(`Database listening at http://localhost:${port}`)
+})
 
 app.use(logger('dev'));
 app.use(express.json());

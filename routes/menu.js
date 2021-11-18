@@ -28,7 +28,7 @@ router.get('/:id?',
 //Add menu
 router.post('/addmenu', 
 function(request, response) {
-  menu.add(request.body, function(err, dbResult) {
+  menu.addMenu(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {

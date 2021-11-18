@@ -12,8 +12,8 @@ const menu = {
   
       add: function(menu, callback) {
           return db.query(
-              'INSERT INTO menu (productname, productprice, productdescription ) VALUES(?,?)',
-              [menu.productname, menu.productprice], callback
+              'INSERT INTO menu (menudescription) VALUES(?)',
+              [menu.menudescription], callback
           );
       },
   
@@ -23,11 +23,18 @@ const menu = {
   
       update: function(id, menu, callback) {
           return db.query(
-            'UPDATE menu SET productname=?, productprice=?, productdescription=? WHERE idmenu=?',
-            [menu.productname, menu.productprice, id], callback
+            'UPDATE menu SET menudescription WHERE idmenu=?',
+            [menu.menudescription, id], callback
           );
-      }
+      },
 
+        //AddMenu procedure
+        addMenu: function(procedure_params, callback) {
+            return db.query(
+              'CALL addMenu (?)',
+              [procedure_params.menudescription], callback           
+            );
+        },
 }
 
 module.exports = menu;

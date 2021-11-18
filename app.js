@@ -8,6 +8,7 @@ var managerRouter = require('./routes/manager');
 var menuRouter = require('./routes/menu');
 var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
+var productRouter = require('./routes/product');
 
 var app = express();
 
@@ -31,5 +32,6 @@ app.use('/manager', managerRouter);
 app.use('/menu', menuRouter);
 app.use('/order', orderRouter);
 app.use('/restaurant', restaurantRouter);
+app.use('/product', productRouter);
 
 module.exports = app;

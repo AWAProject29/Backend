@@ -1,21 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const restaurant = require('../models/restaurant_model');
+const product = require('../models/product_model');
 
-//Get restaurant by id
+//Get product by id
 router.get('/:id?',
  function(request, response) {
   if (request.params.id) {
-    restaurant.getById(request.params.id, function(err, dbResult) {
+    product.getById(request.params.id, function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {
         response.json(dbResult[0]);
       }
     });
-//Get all restaurants
+//Get all products
     } else {
-    restaurant.getAll(function(err, dbResult) {
+    product.getAll(function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {
@@ -25,22 +25,22 @@ router.get('/:id?',
   }
 });
 
-//Add restaurant
-router.post('/addrestaurant', 
+//Add product
+router.post('/addProduct', 
 function(request, response) {
-  restaurant.add(request.body, function(err, dbResult) {
+  product.addProduct(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
-      response.json("Added a restaurant.");
+      response.json("Added a product.");
     }
   });
 });
 
-//Show restaurants
-router.get('/showRestaurants', 
+//Show products
+router.get('/showProducts', 
 function(request, response) {
-  restaurant.getAll(request.body, function(err, dbResult) {
+  product.getAll(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
@@ -49,10 +49,10 @@ function(request, response) {
   });
 });
 
-//Delete restaurant
+//Delete product
 router.delete('delete/:id', 
 function(request, response) {
-  restaurant.delete(request.params.id, function(err, dbResult) {
+  product.delete(request.params.id, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
@@ -61,19 +61,19 @@ function(request, response) {
   });
 });
 
-//Update restaurant
+//Update product
 router.put('update/:id', 
 function(request, response) {
-  restaurant.update(request.params.id, request.body, function(err, dbResult) {
+  product.update(request.params.id, request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
       console.log(dbResult);
       if(dbResult.affectedRows==1){
-        response.json("restaurant updated.");
+        response.json("product updated.");
       }
       else{
-        response.json("restaurant does not exist.");
+        response.json("product does not exist.");
       }
 
     }

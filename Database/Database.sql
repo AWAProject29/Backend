@@ -34,7 +34,7 @@ CREATE TABLE `customer` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `idorder` (`idorder`) /*!80000 INVISIBLE */,
   CONSTRAINT `fk_idorder2` FOREIGN KEY (`idorder`) REFERENCES `order` (`idorder`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (4,NULL,'Joni','Tervo','abcd','23456','kelmitie'),(7,NULL,'Joni','Tervo','abcded','2345621','kelmitie');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,8 +140,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idshoppingcart` int(11) NOT NULL,
-  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\n\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
-  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\nPreparing order\\\\\\\\nReady for delivery\\\\\\\\nDelivering\\\\\\\\nDelivered',
+  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\\\\\\\\\n\\\\\\\\\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
+  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\\\\\\\\\nPreparing order\\\\\\\\\\\\\\\\nReady for delivery\\\\\\\\\\\\\\\\nDelivering\\\\\\\\\\\\\\\\nDelivered',
   `deliverylocation` varchar(45) DEFAULT NULL,
   `cost` float DEFAULT NULL,
   PRIMARY KEY (`idorder`),
@@ -168,14 +167,14 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `productid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL AUTO_INCREMENT,
   `productname` varchar(45) NOT NULL,
   `productprice` float NOT NULL,
   `productdescription` varchar(45) DEFAULT NULL,
   `productimage` blob,
   PRIMARY KEY (`productid`),
   UNIQUE KEY `productname_UNIQUE` (`productname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,6 +183,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'Burgir',1234,'descriptiondescriptiondescription',NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +208,7 @@ CREATE TABLE `restaurant` (
   UNIQUE KEY `restaurantname_UNIQUE` (`restaurantname`),
   KEY `idmenu` (`idmenu`) /*!80000 INVISIBLE */,
   CONSTRAINT `fk_idmenu` FOREIGN KEY (`idmenu`) REFERENCES `menu` (`idmenu`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +290,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addCustomer`(
     IN pw VARCHAR(45),
     IN adr VARCHAR(45)
 )
-INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr); ;;
+INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -314,6 +314,28 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
     IN managerauthentication VARCHAR(45)
 )
 INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication) ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `addProduct` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addProduct`(
+    IN productname VARCHAR(45),
+    IN productprice FLOAT(53),
+    IN productdescription VARCHAR(45),
+    IN productimage BLOB
+)
+INSERT INTO product VALUES (productid, productname, productprice, productdescription, productimage); ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -402,6 +424,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `showProducts` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showProducts`()
+BEGIN
+    SELECT *  FROM product;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `showRestaurants` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -431,4 +472,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16 12:02:22
+-- Dump completed on 2021-11-18 11:07:08

@@ -1,4 +1,5 @@
 const db = require('../database');
+const bcrypt = require('bcryptjs');
 
 const customer = {
 
@@ -30,19 +31,19 @@ const customer = {
 
     //AddCustomer procedure
     addCustomer: function(procedure_params, callback) {
+
+      // create hash of the password
+      const salt = bcrypt.genSaltSync(6);
+      const passwordHash = bcrypt.hashSync(procedure_params.password, salt);
+      
         return db.query(
           'CALL addCustomer (?,?,?,?,?)',
-          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password, procedure_params.address],
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, passwordHash, procedure_params.address],
           callback
         );
-    },
+    }
 
-    //Show Customer procedure
-    // ShowCustomer: function(callback) {
-    //   return db.query(
-    //     'CALL ShowCustomer()', callback
-    //   )
-    // }
+  
 };
 
 

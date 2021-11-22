@@ -1,4 +1,5 @@
 const db = require('../database');
+const bcrypt = require('bcryptjs');
 
 const manager = {
 
@@ -29,21 +30,18 @@ const manager = {
 
       //AddManager procedure
       addManager: function(procedure_params, callback) {
+        
+        // create hash of the password
+        const salt = bcrypt.genSaltSync(6);
+        const passwordHash = bcrypt.hashSync(procedure_params.password, salt);
+
         return db.query(
           'CALL addManager (?,?,?,?,?)',
-          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, procedure_params.password, procedure_params.managerauthentication],
+          [procedure_params.firstname, procedure_params.lastname, procedure_params.email, passwordHash, procedure_params.managerauthentication],
           callback
           
         );
-      },
-
-      // //Show Manager procedure
-      // showManager: function(callback) {
-      //   return db.query(
-      //     'CALL ShowManager()', callback
-      //   )
-      // }
-
+      }
 
 }
 

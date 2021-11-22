@@ -28,7 +28,7 @@ CREATE TABLE `customer` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `address` varchar(45) NOT NULL,
   PRIMARY KEY (`idcustomer`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -60,7 +60,7 @@ CREATE TABLE `manager` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `managerauthentication` varchar(45) NOT NULL,
   PRIMARY KEY (`idmanager`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -91,7 +91,7 @@ CREATE TABLE `menu` (
   `idmenu` int(11) NOT NULL AUTO_INCREMENT,
   `menudescription` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idmenu`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,8 +140,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idshoppingcart` int(11) NOT NULL,
-  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
-  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nPreparing order\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nReady for delivery\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivering\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivered',
+  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
+  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nPreparing order\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nReady for delivery\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivering\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivered',
   `deliverylocation` varchar(45) DEFAULT NULL,
   `cost` float DEFAULT NULL,
   PRIMARY KEY (`idorder`),
@@ -286,10 +286,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addCustomer`(
     IN firstname VARCHAR(45),
     IN lastname VARCHAR(45),
     IN email VARCHAR(45),
-    IN pw VARCHAR(45),
+    IN pw VARCHAR(100),
     IN adr VARCHAR(45)
 )
-INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr) ;;
+INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr); ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -309,10 +309,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
     IN firstname VARCHAR(45),
     IN lastname VARCHAR(45),
     IN email VARCHAR(45),
-    IN pw VARCHAR(45),
+    IN pw VARCHAR(100),
     IN managerauthentication VARCHAR(45)
 )
-INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication) ;;
+INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication); ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -490,4 +490,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-18 16:32:19
+-- Dump completed on 2021-11-22 13:51:52

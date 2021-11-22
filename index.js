@@ -32,31 +32,29 @@ const users = [
     },
 ]; 
 
-passport.use(new BasicStrategy(
-    function checkCredentials (email, password, done) {
-        
-        return db.query(
-          'CALL checkAccount(?,?)',
-          [customer.email, customer.password, id], callback
-        )));
-       
-        // if match is found, compare the passwords.
-        if(user != null){
-            // if passwords match, then proceed to route handler ( the protected resource )
-            
-            // compares given password to if its matching to database users
-            if(bcrypt.compareSync(password, user.password)){
-                done(null, user)
-            } else{
-                done(null, false);
-            }
 
-        }else {
-            // reject the request
-            done(null, false);
+    passport.use(new BasicStrategy(
+        function(email, password, done) {
+      
+          const userExists = db.query(
+            'CALL checkAccount(?,?)',
+            [customer.email, customer.password, id], callback
+          );
+          if(userExists == 'FALSE') {
+            // Username not found
+            console.log("HTTP Basic username not found");
+            return done(null, false, { message: "HTTP Basic user not found" });
+          }
+      
+          /* Verify password match */
+          if(bcrypt.compareSync(password, customer.password) == false) {
+            // Password does not match
+            console.log("HTTP Basic password not matching username");
+            return done(null, false, { message: "HTTP Basic password not found" });
+          }
+          return done(null, userExists);
         }
-    }
-    ));
+      ));
 
 
 

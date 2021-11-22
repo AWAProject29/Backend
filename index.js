@@ -5,7 +5,7 @@ const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy; 
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
-
+const db = require('../database');
 
 app.use(express.json());
 
@@ -33,19 +33,19 @@ const users = [
 ]; 
 
 passport.use(new BasicStrategy(
-    function(username, password, done){
-        console.log('Username: ' + username);
-        console.log('password: ' + password);
+    function checkCredentials (email, password, done) {
+        
+        return db.query(
+          'CALL checkAccount(?,?)',
+          [customer.email, customer.password, id], callback
+        )));
        
-        //SQL query here
-        // search matching username from our user storage
-        const user = users.find(u => u.username === username);
-
         // if match is found, compare the passwords.
         if(user != null){
             // if passwords match, then proceed to route handler ( the protected resource )
             
-            if(user.password === password){
+            // compares given password to if its matching to database users
+            if(bcrypt.compareSync(password, user.password)){
                 done(null, user)
             } else{
                 done(null, false);
@@ -56,7 +56,7 @@ passport.use(new BasicStrategy(
             done(null, false);
         }
     }
-));
+    ));
 
 
 
@@ -109,5 +109,3 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-// // compares given password to if its matching to database users
-//if(bcrypt.compareSync(password, user.password)

@@ -43,7 +43,6 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (10,NULL,'Daniel','Leinonen','email21','$2a$06$S.peck8GpecDYWtvyfEEEeQ9MIl7TsYX5U3IGNV32fPvgbzXAEDw.','hello'),(12,NULL,'Tavis','Sinclair','tavisuk@uk','$2a$06$IRDqyKBH173PBppGXe9Hb..qIS62nLHEDIjFPM.SuDC2qkGPuMr1y','hello');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +89,7 @@ DROP TABLE IF EXISTS `menu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menu` (
   `idmenu` int(11) NOT NULL AUTO_INCREMENT,
-  `menudescription` varchar(45) DEFAULT NULL,
+  `menudescription` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`idmenu`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,8 +140,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idshoppingcart` int(11) NOT NULL,
-  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
-  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nPreparing order\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nReady for delivery\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivering\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivered',
+  `eta` datetime DEFAULT NULL COMMENT 'Format of DATETIME data type is (yyyy-mm-dd hh:mm:ss)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nProbably have to alter data within the code to only include (hh:mm:ss) in the ETA of the order.',
+  `status` varchar(45) DEFAULT NULL COMMENT 'Order received\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nPreparing order\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nReady for delivery\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivering\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\nDelivered',
   `deliverylocation` varchar(45) DEFAULT NULL,
   `cost` float DEFAULT NULL,
   PRIMARY KEY (`idorder`),
@@ -290,7 +289,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addCustomer`(
     IN pw VARCHAR(100),
     IN adr VARCHAR(45)
 )
-INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr); ;;
+INSERT INTO Customer VALUES (idcustomer, idorder, firstname, lastname, email, pw, adr) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -313,7 +312,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
     IN pw VARCHAR(100),
     IN managerauthentication VARCHAR(45)
 )
-INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication); ;;
+INSERT INTO manager VALUES (idmanager, idrestaurant, idorder, firstname, lastname, email, pw, managerauthentication) ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -330,9 +329,9 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addMenu`(
-    IN menudescription VARCHAR(45)
+    IN menudescription VARCHAR(400)
 )
-INSERT INTO menu VALUES (idmenu, menudescription) ;;
+INSERT INTO menu VALUES (idmenu, menudescription) ; ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -516,4 +515,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-22 14:44:15
+-- Dump completed on 2021-11-23 10:37:01

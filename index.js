@@ -32,6 +32,7 @@ const users = [
     },
 ]; 
 
+<<<<<<< HEAD
 passport.use(new BasicStrategy(
     function(email, password, done) {
 
@@ -55,6 +56,36 @@ passport.use(new BasicStrategy(
     }
   ));
      
+=======
+
+    passport.use(new BasicStrategy(
+        function(email, password, done) {
+      
+          const userExists = db.query(
+            'CALL checkAccount(?,?)',
+            [customer.email, customer.password, id], callback
+          );
+          if(userExists == 'FALSE') {
+            // Username not found
+            console.log("HTTP Basic username not found");
+            return done(null, false, { message: "HTTP Basic user not found" });
+          }
+      
+          /* Verify password match */
+          if(bcrypt.compareSync(password, customer.password) == false) {
+            // Password does not match
+            console.log("HTTP Basic password not matching username");
+            return done(null, false, { message: "HTTP Basic password not found" });
+          }
+          return done(null, userExists);
+        }
+      ));
+
+
+
+
+
+>>>>>>> 559c6ce8eea400cfeb2f2f4c9c8bdf4fb6976d0c
 function httpBasicTest(req, res, next) {
     console.log('http basic test executing...');
     next();

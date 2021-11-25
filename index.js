@@ -9,7 +9,9 @@ const jwt = require('jsonwebtoken');
 const JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt;
 const db = require('../database');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 
 
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
 
 //Login System
 
-//modify for database
+//modify for database ?
 const users = [
     {
         id: uuidv4(),

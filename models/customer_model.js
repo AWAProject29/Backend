@@ -41,8 +41,15 @@ const customer = {
           [procedure_params.firstname, procedure_params.lastname, procedure_params.email, passwordHash, procedure_params.address],
           callback
         );
-    }
+    },
 
+    checkAccount: function(procedure_params, callback) {
+        return db.query(
+          'CALL checkAccount (?,?)',
+          [procedure_params.email, procedure_params.password],
+          callback
+        );
+    }
   
 };
 

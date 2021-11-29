@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors')
 
 var customerRouter = require('./routes/customer');
 var managerRouter = require('./routes/manager');
@@ -15,7 +16,10 @@ var app = express();
 const port = 4000
 
 
-//BasicAuth or some other authentication 
+app.use(cors({
+    origin: "http://localhost:3000", 
+    origin: "http://localhost:3001"    
+}))
 
 app.listen(port, () => {
     console.log(`Database listening at http://localhost:${port}`)

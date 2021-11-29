@@ -11,13 +11,33 @@ const JwtStrategy = require('passport-jwt').Strategy,
 // const db = require('./database.js');
 
 
+// const mysql = require('mysql');
+// const dbcon = mysql.createPool({
+//   host: 'localhost',
+//   user: 'Daniel1',                       //Apply your own SQL username and password here
+//   password: 'MyUzero1Acc',                   //Apply your own SQL username and password here
+//   database: 'hermes_database',
+// });
+
+// dbcon.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
+
 const mysql = require('mysql');
-const dbconnection = mysql.createConnection({
-  host: 'localhost',
-  user: 'Daniel1',                       //Apply your own SQL username and password here
-  password: 'MyUzero1Acc',                   //Apply your own SQL username and password here
-  database: 'hermes_database'
+
+const dbcon = mysql.createConnection({
+    host: "localhost",
+    user: "Daniel1",
+    password: "MyUzero1Acc",
+    database: "hermes_database"
 });
+
+// dbcon.connect(function (err) {
+//     if (err) throw err;
+//     console.log("Connected!");
+// })
+
 
 
 const cors = require('cors');
@@ -25,59 +45,79 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
-    console.log('Demo middleware executing..');
+    console.log('Demo middleware executing...');
 
     next();
 });
 
-//Login System
 
-//modify for database ?
-const users = [
-    {
-        id: uuidv4(),
-        email: 'Teppo@gmail.com',
-        password: 'testisalasana'
-    },
-    {
-        id: uuidv4(),
-        email: 'Testi@gmail.com',
-        password: '123'
-    },
-]; 
+
+dbcon.connect(function (err) {
+  if (err) throw err;
+  let email = 'TeppoTesti@gmail.com';
+  dbcon.query("SELECT * FROM customer", function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+  });
+  dbcon.query("SELECT * FROM customer WHERE email = ?", [email], function (err, result, fields) {
+      if (err) throw err;
+      let pwd = result[0].password; //hakee pelkän salasanan. Muita kenttiä olisi result[0].email, result[0].name ja result[0].somedata
+                                                                  // Indeksi 0 koska ei pitäisi palautua kuin yksi osuma jos email on yksilöllinen
+                                                                   // result itsessään on objekti
+      // console.log("Password is: " + pwd);
+
+
+
+
+  });
+});
+
+
+
+
+//Login System
 
 passport.use(new BasicStrategy(
   function(email, password, done) {
-    console.log('email: ' + email)
-    console.log('password: ' + password)
+    // console.log('email: ' + email)
+    // console.log('password: ' + password)
 
-    const user = users.find(u => u.email === email)
+    dbcon.query("SELECT * FROM customer", function (err, result, fields) {
+        if (err) throw err;
+        // console.log(result);
+    });
+    dbcon.query("SELECT * FROM customer WHERE email = ?", [email], function (err, result, fields) {
+        if (err) throw err;
+        let userpwd = result[0].password; //hakee pelkän salasanan. Muita kenttiä olisi result[0].email, result[0].firstname jne.
+                                                                    // Indeksi 0 koska ei pitäisi palautua kuin yksi osuma jos email on yksilöllinen
+                                                                     // result itsessään on objekti
+        let useremail = result[0].email;
+
+        console.log(result[0]);
+
+        console.log("User email is: " + useremail);
+        console.log("Password is: " + userpwd);
+        console.log("\n\n\n")
+
+        if(useremail != null) {
+          if(userpwd === password) {
+            done(null, useremail);
+          } else {
+            done(null, false);
+          }
+          done(null, useremail);
+        } else {
+          done(null, false);
+        }
+        return done(null, useremail);
+
+      });
+
+      
+    }));
+
 
     
-    dbconnection.connect(function(err) {
-      if (err) throw err;
-      console.log("Connected!");
-    });
-    const dbuser = dbconnection.query('SELECT * FROM Customer WHERE email=? AND password=?', [email, password])
-    // const dbuser = connection.query('SELECT * FROM Customer WHERE email=\'Teppo@gmail.com\' AND password=\'$2a$06$f9yL5DdESnLGRvo9.LmebOytfXRlwdbpIpilpe9fkNooTYOqipu0e\'');
-
-
-    console.log(dbuser);
-
-    if(dbuser != null) {
-      // if(user.password === password) {
-      //   done(null, user);
-      // } else {
-      //   done(null, false);
-      // }
-      done(null, dbuser);
-    } else {
-      done(null, false);
-    }
-
-    return done(null, email);
-  }
-));
 
 // passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done){
 //   console.log('JWT is valid');
@@ -101,7 +141,7 @@ app.post('/jwtLogin', passport.authenticate('basic', { session: false }), (req, 
   //Change for information from SQL table
   const payload = { 
     user: {
-      email: req.customer.email,
+      email: req.user.email,
       password: req.user.password
     }
   };
@@ -128,7 +168,7 @@ app.get('/jwt-protected-resource',  passport.authenticate('jwt', { session: fals
 })
 
 app.get('/my-protected-resource', passport.authenticate('basic', { session: false }), (req, res) => {
-  console.log('protected resource accessed');
+  console.log('We\'re in /my-protected-resource app.get method');
 
   res.send('Hello protected world');
 })
@@ -162,4 +202,4 @@ app.listen(port, () => {
 //     res.send("OK");
 // })
 
-   
+

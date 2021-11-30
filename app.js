@@ -13,7 +13,7 @@ var productRouter = require('./routes/product');
 
 var app = express();
 
-const port = 4000
+const port = (process.env.port || 4000);
 
 
 app.use(cors({

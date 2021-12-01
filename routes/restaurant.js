@@ -32,6 +32,7 @@ function(request, response) {
     if (err) {
       response.json(err);
     } else {
+      console.log(request.body.restaurantimage);
       response.json("Added a restaurant.");
     }
   });

@@ -118,11 +118,7 @@ app.get('/jwt-protected-resource',  passport.authenticate('jwt', { session: fals
   res.send("OK, for user " + req.user.username);
 })
 
-app.get('/my-protected-resource', passport.authenticate('basic', { session: false }), (req, res) => {
-  console.log('We\'re in /my-protected-resource app.get method');
 
-  res.send('Hello protected world');
-})
                               //This is the authentication implementation to function
 app.get('/some-other-resource', passport.authenticate('basic', { session: false }), (req, res) => { 
   res.send('Other protected resource accessed');

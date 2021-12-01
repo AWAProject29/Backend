@@ -34,7 +34,7 @@ const customer = {
 
       // create hash of the password
       const salt = bcrypt.genSaltSync(6);
-      const passwordHash = bcrypt.hashSync(procedure_params.customerpassword, salt);
+      const passwordHash = bcrypt.hashSync(procedure_params.password, salt);
       
         return db.query(
           'CALL addCustomer (?,?,?,?,?)',

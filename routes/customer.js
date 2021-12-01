@@ -30,6 +30,7 @@ router.get('/:id?',
 //Add customer
 router.post('/addCustomer', 
 function(request, response) {
+  console.log(request.body);
   customer.addCustomer(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);

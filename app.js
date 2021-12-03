@@ -33,7 +33,8 @@ dbcon.getConnection(function (err) {
     if (err) throw err;
 });
 
-passport.use(new BasicStrategy(
+// Passport Customer
+passport.use('user', new BasicStrategy(
     function (email, password, done) {
         dbcon.query("SELECT * FROM customer", function (err, result, fields) {
             if (err) throw err;
@@ -42,7 +43,42 @@ passport.use(new BasicStrategy(
         dbcon.query("SELECT * FROM customer WHERE email = ?", [email], function (err, result, fields) {
             if (err) throw err;
 
-            let userpwd = result[0].customerpassword;
+            let userpwd = result[0].password;
+            // Searches for the password of the user. Other valid searches: result[0].email, 
+            // result[0].firstname etc.
+            let useremail = result[0].email;
+
+            console.log(result[0]); // Prints all the data of the one specific user who's logging in
+
+            console.log("User email is: " + useremail); // User email
+            console.log("User password is: " + userpwd); // User password
+            console.log("\n\n\n")
+
+            let isPasswordCorrect = bcrypt.compareSync(password, userpwd);
+
+            if (isPasswordCorrect == true) {
+                console.log("Correct password");
+            }
+            else {
+                // Password does not match
+                console.log("HTTP Basic password not matching username");
+                return done(null, false, { message: "HTTP Basic password not found" });
+            }
+            return done(null, useremail);
+        });
+    }));
+
+// Passport Manager
+passport.use('manager', new BasicStrategy(
+    function (email, password, done) {
+        dbcon.query("SELECT * FROM manager", function (err, result, fields) {
+            if (err) throw err;
+            console.log(result); // Prints an array of the list of objects in "customer" table
+        });
+        dbcon.query("SELECT * FROM manager WHERE email = ?", [email], function (err, result, fields) {
+            if (err) throw err;
+
+            let userpwd = result[0].password;
             // Searches for the password of the user. Other valid searches: result[0].email, 
             // result[0].firstname etc.
             let useremail = result[0].email;
@@ -96,8 +132,26 @@ app.use('/order', orderRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/product', productRouter);
 
-/////------
-app.post('/LoginforJWT', passport.authenticate('basic', { session: false }), (req, res) => {
+/////------Login Customer
+app.post('/LoginforJWTcustomer', passport.authenticate('user', { session: false }), (req, res) => {
+    //generate JWT
+    //Change for information from SQL table
+    const payload = {
+        user: {
+            email: req.user.email,
+            password: req.user.password
+        }
+    };
+    const secretKey = "MyVerySecretSigningKey";
+    const options = {
+        expiresIn: '1d'
+    }
+    const generatedJWT = jwt.sign(payload, secretKey, options)
+    res.json({ jwt: generatedJWT });
+})
+
+/////------Login Manager
+app.post('/LoginforJWTmanager', passport.authenticate('manager', { session: false }), (req, res) => {
     //generate JWT
     //Change for information from SQL table
     const payload = {

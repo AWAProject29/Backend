@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors')
+var bodyParser = require('body-parser')
 
 var customerRouter = require('./routes/customer');
 var managerRouter = require('./routes/manager');
@@ -11,11 +12,12 @@ var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
 var productRouter = require('./routes/product');
 
-const fileUpload = require('express-fileupload');
-
-
 
 var app = express();
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
 
 const port = (process.env.port || 4000);
 
@@ -71,8 +73,6 @@ const jwtOptions = {
 }
 /////------
 
-app.use(fileUpload());
-
 app.use(cors({
     origin: "http://localhost:3000", 
     origin: "http://localhost:3001"    
@@ -87,6 +87,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json({limit: '250kb'}));
 
 app.use('/customer', customerRouter);
 app.use('/manager', managerRouter);

@@ -3,14 +3,6 @@ const router = express.Router();
 const restaurant = require('../models/restaurant_model');
 const app = require('../app');
 
-const multer = require('multer');
-const upload = multer({storage:multer.memoryStorage()});
-
-// const exphbs = require('express-handlebars');
-
-
-// app.engine('hbs', exphbs({ extname: '.hbs' }));
-// app.set('view engine', 'hbs');
 
 //Get restaurant by id
 router.get('/:id?',
@@ -36,7 +28,7 @@ router.get('/:id?',
 });
 
 //Add restaurant
-router.post('/addrestaurant', upload.single('uploadedImage'), 
+router.post('/addrestaurant', 
 function(request, response) {
   console.log('Were in addrestaurant function');
   restaurant.add(request.body, function(err, dbResult) {

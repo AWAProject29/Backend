@@ -11,6 +11,10 @@ var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
 var productRouter = require('./routes/product');
 
+const fileUpload = require('express-fileupload');
+
+
+
 var app = express();
 
 const port = (process.env.port || 4000);
@@ -67,6 +71,7 @@ const jwtOptions = {
 }
 /////------
 
+app.use(fileUpload());
 
 app.use(cors({
     origin: "http://localhost:3000", 
@@ -91,7 +96,7 @@ app.use('/restaurant', restaurantRouter);
 app.use('/product', productRouter);
 
 /////------
-app.post('/jwtLogin', passport.authenticate('basic', { session: false }), (req, res) => {
+app.post('/LoginforJWT', passport.authenticate('basic', { session: false }), (req, res) => {
     //generate JWT
     //Change for information from SQL table
     const payload = {

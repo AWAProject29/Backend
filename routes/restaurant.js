@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const restaurant = require('../models/restaurant_model');
+const app = require('../app');
+
+const multer = require('multer');
+const upload = multer({storage:multer.memoryStorage()});
+
+// const exphbs = require('express-handlebars');
+
+
+// app.engine('hbs', exphbs({ extname: '.hbs' }));
+// app.set('view engine', 'hbs');
 
 //Get restaurant by id
 router.get('/:id?',
@@ -26,15 +36,33 @@ router.get('/:id?',
 });
 
 //Add restaurant
-router.post('/addrestaurant', 
+router.post('/addrestaurant', upload.single('uploadedImage'), 
 function(request, response) {
+  console.log('Were in addrestaurant function');
   restaurant.add(request.body, function(err, dbResult) {
+    console.log('Were in restaurant.add function');
     if (err) {
+      console.log('Were in restaurant.add ERROR function');
       response.json(err);
     } else {
-      console.log(request.body.restaurantimage);
+      // console.log(request.body.restaurantimage);
+      // let sampleFile;
+      // let uploadPath;
+
+      // let restaurantImage = request.body.restaurantimage
+      // console.log(restaurantImage); 
+
       response.json("Added a restaurant.");
+
+      if(!request.body || Object.keys(request.body).length === 0) {
+        console.log('Were in response.status(400) if statement');
+        return response.status(400).send('No files were uploaded.');
+      }
+
+      
     }
+
+      
   });
 });
 
@@ -49,6 +77,7 @@ function(request, response) {
     }
   });
 });
+
 
 //Delete restaurant
 router.delete('delete/:id', 

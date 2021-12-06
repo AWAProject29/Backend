@@ -38,6 +38,15 @@ const product = {
         );
       },
 
+      //AddProduct procedure
+      removeProduct: function(procedure_params, callback) {
+        console.log("This is removeProduct at models: " + procedure_params);
+        return db.query(
+          'DELETE FROM product WHERE productid = ?', [procedure_params],
+          callback
+        );
+      },
+
 }
 
 module.exports = product;

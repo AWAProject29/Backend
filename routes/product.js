@@ -50,6 +50,18 @@ function(request, response) {
   });
 });
 
+router.delete('/removeProduct/:productId', 
+function(request, response) {
+  product.removeProduct(request.params.productId, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json("Removed a product.");
+    }
+  });
+});
+
+
 //Delete product
 router.delete('delete/:id', 
 function(request, response) {

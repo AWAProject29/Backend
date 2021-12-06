@@ -28,6 +28,7 @@ router.get('/:id?',
 //Add product
 router.post('/addProduct', 
 function(request, response) {
+  console.log("This is the request body: " + JSON.stringify(request.body));
   product.addProduct(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);

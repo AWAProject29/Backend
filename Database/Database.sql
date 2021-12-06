@@ -283,7 +283,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addCustomer`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addCustomer`(
 	IN firstname VARCHAR(45),
 	IN lastname VARCHAR(45),
 	IN email VARCHAR(45),
@@ -306,7 +306,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addManager`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addManager`(
 	IN firstname VARCHAR(45),
 	IN lastname VARCHAR(45),
 	IN email VARCHAR(45),
@@ -329,7 +329,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addRestaurant`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addRestaurant`(
     IN restaurantname VARCHAR(45),
 	IN address VARCHAR(45),
 	IN restauranttype VARCHAR(45),
@@ -355,7 +355,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `checkAccount`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkAccount`(
 IN email_address VARCHAR(45),
 IN user_password VARCHAR(45)
 )
@@ -380,7 +380,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `searchRestaurant`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `searchRestaurant`(
 	IN searchstring VARCHAR(45)
 )
 SELECT * FROM restaurant WHERE restaurantname LIKE CONCAT('%', searchstring, '%') OR address LIKE CONCAT('%', searchstring, '%') OR restauranttype LIKE CONCAT('%', searchstring, '%') ;;
@@ -399,7 +399,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showCustomers`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showCustomers`()
 BEGIN
     SELECT *  FROM Customer;
 END ;;
@@ -418,7 +418,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showManagers`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showManagers`()
 BEGIN
     SELECT *  FROM manager;
 END ;;
@@ -437,7 +437,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showRestaurants`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showRestaurants`()
 BEGIN
     SELECT *  FROM restaurant;
 END ;;

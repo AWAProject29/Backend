@@ -33,8 +33,8 @@ dbcon.getConnection(function (err) {
     if (err) throw err;
 });
 
-// Passport Customer
-passport.use('user', new BasicStrategy(
+//Passport Customer
+passport.use("user", new BasicStrategy(
     function (email, password, done) {
         dbcon.query("SELECT * FROM customer", function (err, result, fields) {
             if (err) throw err;
@@ -69,7 +69,7 @@ passport.use('user', new BasicStrategy(
     }));
 
 // Passport Manager
-passport.use('manager', new BasicStrategy(
+passport.use("manager", new BasicStrategy(
     function (email, password, done) {
         dbcon.query("SELECT * FROM manager", function (err, result, fields) {
             if (err) throw err;
@@ -157,7 +157,8 @@ app.post('/LoginforJWTmanager', passport.authenticate('manager', { session: fals
     const payload = {
         user: {
             email: req.user.email,
-            password: req.user.password
+            password: req.user.password,
+            managerauthentication: req.user.managerauthentication
         }
     };
     const secretKey = "MyVerySecretSigningKey";
@@ -167,6 +168,7 @@ app.post('/LoginforJWTmanager', passport.authenticate('manager', { session: fals
     const generatedJWT = jwt.sign(payload, secretKey, options)
     res.json({ jwt: generatedJWT });
 })
+
 
 app.get('/my-protected-resource', passport.authenticate('basic', { session: false }), (req, res) => {
     console.log('We\'re in /my-protected-resource app.get method');

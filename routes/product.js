@@ -28,6 +28,7 @@ router.get('/:id?',
 //Add product
 router.post('/addProduct', 
 function(request, response) {
+  console.log("This is the request body: " + JSON.stringify(request.body));
   product.addProduct(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
@@ -48,6 +49,18 @@ function(request, response) {
     }
   });
 });
+
+router.delete('/removeProduct/:productId', 
+function(request, response) {
+  product.removeProduct(request.params.productId, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json("Removed a product.");
+    }
+  });
+});
+
 
 //Delete product
 router.delete('delete/:id', 

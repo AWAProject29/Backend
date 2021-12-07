@@ -32,10 +32,18 @@ const product = {
       //AddProduct procedure
       addProduct: function(procedure_params, callback) {
         return db.query(
-          'CALL addProduct (?,?,?,?)',
-          [procedure_params.productname, procedure_params.productprice, procedure_params.productdescription, procedure_params.productimage],
+          'CALL addProduct (?,?,?,?,?)',
+          [procedure_params.productname, procedure_params.productprice, procedure_params.productcategory, procedure_params.productdescription, procedure_params.productimage],
           callback
-          
+        );
+      },
+
+      //AddProduct procedure
+      removeProduct: function(procedure_params, callback) {
+        console.log("This is removeProduct at models: " + procedure_params);
+        return db.query(
+          'DELETE FROM product WHERE productid = ?', [procedure_params],
+          callback
         );
       },
 

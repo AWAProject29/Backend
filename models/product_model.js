@@ -32,8 +32,8 @@ const product = {
       //AddProduct procedure
       addProduct: function(procedure_params, callback) {
         return db.query(
-          'CALL addProduct (?,?,?,?,?)',
-          [procedure_params.productname, procedure_params.productprice, procedure_params.productcategory, procedure_params.productdescription, procedure_params.productimage],
+          'CALL addProduct (?,?,?,?,?,?)',
+          [procedure_params.productname, procedure_params.productprice, procedure_params.productcategory, procedure_params.productdescription, procedure_params.productimage, procedure_params.restaurantpageid],
           callback
         );
       },

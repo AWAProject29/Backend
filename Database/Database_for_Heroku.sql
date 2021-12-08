@@ -282,11 +282,11 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addCustomer`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `addCustomer`(
 	IN firstname VARCHAR(45),
 	IN lastname VARCHAR(45),
 	IN email VARCHAR(45),
@@ -305,11 +305,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addManager`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `addManager`(
 	IN firstname VARCHAR(45),
 	IN lastname VARCHAR(45),
 	IN email VARCHAR(45),
@@ -328,11 +328,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addProduct`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `addProduct`(
     IN productname VARCHAR(45),
 	IN productprice FLOAT,
     IN productcategory VARCHAR(45),
@@ -353,11 +353,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `addRestaurant`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `addRestaurant`(
     IN restaurantname VARCHAR(45),
 	IN address VARCHAR(45),
 	IN restauranttype VARCHAR(45),
@@ -379,11 +379,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `checkAccount`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `checkAccount`(
 IN email_address VARCHAR(45),
 IN user_password VARCHAR(45)
 )
@@ -404,11 +404,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `removeProduct`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `removeProduct`(
     IN removedProductId INT(11)
 )
 DELETE FROM product WHERE productid = removedProductId ;;
@@ -423,11 +423,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `searchRestaurant`(
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `searchRestaurant`(
 	IN searchstring VARCHAR(45)
 )
 SELECT * FROM restaurant WHERE restaurantname LIKE CONCAT('%', searchstring, '%') OR address LIKE CONCAT('%', searchstring, '%') OR restauranttype LIKE CONCAT('%', searchstring, '%') ;;
@@ -442,11 +442,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showCustomers`()
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `showCustomers`()
 BEGIN
     SELECT *  FROM Customer;
 END ;;
@@ -461,11 +461,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showManagers`()
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `showManagers`()
 BEGIN
     SELECT *  FROM manager;
 END ;;
@@ -480,11 +480,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`Daniel1`@`localhost` PROCEDURE `showRestaurants`()
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `showRestaurants`()
 BEGIN
     SELECT *  FROM restaurant;
 END ;;

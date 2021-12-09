@@ -43,19 +43,14 @@ passport.use("user", new BasicStrategy(
         dbcon.query("SELECT * FROM customer WHERE email = ?", [email], function (err, result, fields) {
             if (err) throw err;
 
-            let userpwd = result[0].password;
+            let userpwd = result[0].customerpassword;
+ 
             // Searches for the password of the user. Other valid searches: result[0].email, 
             // result[0].firstname etc.
             let useremail = result[0].email;
 
-            console.log(result[0]); // Prints all the data of the one specific user who's logging in
-
-            console.log("User email is: " + useremail); // User email
-            console.log("User password is: " + userpwd); // User password
-            console.log("\n\n\n")
-
             let isPasswordCorrect = bcrypt.compareSync(password, userpwd);
-
+        
             if (isPasswordCorrect == true) {
                 console.log("Correct password");
             }
@@ -82,12 +77,6 @@ passport.use("manager", new BasicStrategy(
             // Searches for the password of the user. Other valid searches: result[0].email, 
             // result[0].firstname etc.
             let useremail = result[0].email;
-
-            console.log(result[0]); // Prints all the data of the one specific user who's logging in
-
-            console.log("User email is: " + useremail); // User email
-            console.log("User password is: " + userpwd); // User password
-            console.log("\n\n\n")
 
             let isPasswordCorrect = bcrypt.compareSync(password, userpwd);
 

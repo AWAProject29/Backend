@@ -73,7 +73,7 @@ passport.use("manager", new BasicStrategy(
         dbcon.query("SELECT * FROM manager WHERE email = ?", [email], function (err, result, fields) {
             if (err) throw err;
 
-            let userpwd = result[0].password;
+            let userpwd = result[0].managerpassword;
             // Searches for the password of the user. Other valid searches: result[0].email, 
             // result[0].firstname etc.
             let useremail = result[0].email;

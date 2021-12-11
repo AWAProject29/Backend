@@ -11,7 +11,7 @@ var menuRouter = require('./routes/menu');
 var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
 var productRouter = require('./routes/product');
-
+var path = require('path');
 
 var app = express();
 
@@ -19,7 +19,16 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 
-const port = (process.env.port || 4000);
+
+
+const port = `https://hermes-project-group-29.herokuapp.com/` || 4000;
+
+
+
+app.listen(port, (err) => {
+    if (err) return console.log(err);
+    console.log(`Server running on port: `, port)
+})
 
 /////------
 const dbcon = require('./database');
@@ -103,9 +112,6 @@ app.use(cors({
     origin: "http://localhost:3001"    
 }))
 
-app.listen(port, () => {
-    console.log(`Database listening at http://localhost:${port}`)
-})
 
 app.use(logger('dev'));
 app.use(express.json());

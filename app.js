@@ -19,7 +19,11 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 
-
+app.use(cors({
+    origin: "http://localhost:3000", 
+    origin: "http://localhost:3001",
+    origin: "https://hermes-delivery.herokuapp.com/"    
+}))
 
 const PORT = process.env.PORT || 4000;
 
@@ -107,10 +111,7 @@ const jwtOptions = {
 }
 /////------
 
-app.use(cors({
-    origin: "http://localhost:3000", 
-    origin: "http://localhost:3001"    
-}))
+
 
 
 app.use(logger('dev'));

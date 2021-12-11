@@ -21,13 +21,13 @@ app.use(express.json());
 
 
 
-const port = `https://hermes-project-group-29.herokuapp.com/` || 4000;
+const PORT = process.env.PORT || 4000;
 
 
 
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
     if (err) return console.log(err);
-    console.log(`Server running on port: `, port)
+    console.log(`Server running on port: `, PORT)
 })
 
 /////------

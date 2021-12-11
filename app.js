@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 
 app.use(cors({
-    
+    origin: ""
     // origin: "http://localhost:3000", 
     // origin: "http://localhost:3001",
     // origin: "https://hermes-delivery.herokuapp.com/"    

@@ -24,13 +24,7 @@ app.use(function (req, res, next){
    next();
 });
 
-app.use(cors({
-    // origin: "https://hermes-project-group-29.herokuapp.com/*",
-    // origin: "https://hermes-delivery.herokuapp.com",
-    // origin: "http://localhost:3000", 
-    // origin: "http://localhost:3001",
-    // origin: "https://hermes-delivery.herokuapp.com/"    
-}))
+
 
 const PORT = process.env.PORT || 4000;
 
@@ -117,7 +111,13 @@ const jwtOptions = {
     secretOrKey: "MyVerySecretSigningKey"
 }
 /////------
-
+app.use(cors({
+    // origin: "https://hermes-project-group-29.herokuapp.com/*",
+    // origin: "https://hermes-delivery.herokuapp.com",
+    // origin: "http://localhost:3000", 
+    // origin: "http://localhost:3001",
+    // origin: "https://hermes-delivery.herokuapp.com/"    
+}))
 
 
 

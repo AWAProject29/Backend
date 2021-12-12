@@ -21,13 +21,6 @@ app.use((req, res, next) => {
 });
 
 
-// const dbcon = mysql.createConnection({
-//     host: "localhost",
-//     user: "Daniel1",
-//     password: "MyUzero1Acc",
-//     database: "hermes_database"
-// });
-
 dbcon.connect(function (err) {
   if (err) throw err;
 });

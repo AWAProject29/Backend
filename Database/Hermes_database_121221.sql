@@ -177,7 +177,7 @@ CREATE TABLE `product` (
   `restaurantpageid` int(11) DEFAULT NULL,
   PRIMARY KEY (`productid`),
   UNIQUE KEY `productname_UNIQUE` (`productname`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (23,'PRODNAME23',23,'CAT23','DESC23',NULL,23);
+INSERT INTO `product` VALUES (23,'PRODNAME23',23,'CAT23','DESC23',NULL,23),(24,'Taco chips & salsa',8.5,'Starter','Delicious taco chips with fresh salsa',NULL,23);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,13 +248,33 @@ CREATE TABLE `shoppingcart` (
 
 LOCK TABLES `shoppingcart` WRITE;
 /*!40000 ALTER TABLE `shoppingcart` DISABLE KEYS */;
-INSERT INTO `shoppingcart` VALUES (0,1,'PRODNAME23',23,1),(0,8,'name',123,2),(2,9,'name',123,2),(1,23,'PRODNAME23',23,1),(1,25,'NAME25',25,2),(1,27,'NAME25',25,2);
+INSERT INTO `shoppingcart` VALUES (0,1,'PRODNAME23',23,1),(0,8,'name',123,2),(2,9,'name',123,2),(1,23,'PRODNAME23',23,1),(1,24,'Taco chips & salsa',8.5,1),(1,25,'NAME25',25,2),(1,27,'NAME25',25,2);
 /*!40000 ALTER TABLE `shoppingcart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'hermes_database'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `addAmount` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `addAmount`(
+    IN id INT(11),
+    IN amount INT(11)
+)
+UPDATE shoppingcart SET cartitemamount = amount WHERE idcartitem = id; ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `addCustomer` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -400,6 +420,37 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `decreaseAmount` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`b24c114581b63e`@`%` PROCEDURE `decreaseAmount`(
+    IN  id INT(11))
+BEGIN
+	DECLARE amount DECIMAL DEFAULT 0;
+
+    SELECT cartitemamount 
+    INTO amount
+    FROM shoppingcart
+    WHERE idcartitem = id;
+
+    IF amount > 1 THEN
+        UPDATE shoppingcart SET cartitemamount = cartitemamount-1 WHERE idcartitem = id;
+    ELSE
+        DELETE FROM shoppingcart WHERE idcartitem = id;
+    END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `removeProduct` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -505,4 +556,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-11 15:48:37
+-- Dump completed on 2021-12-12 16:01:14

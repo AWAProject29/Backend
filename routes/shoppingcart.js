@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const product = require('../models/shoppingcart_model');
+const shoppingcart = require('../models/shoppingcart_model');
 
 // //Show products
 // router.get('/showProducts', 
@@ -14,26 +14,61 @@ const product = require('../models/shoppingcart_model');
 //   });
 // });
 
+router.get('/:id?',
+ function(request, response) {
+  if (request.params.id) {
+    shoppingcart.getShoppingCartById(request.params.id, function(err, dbResult) {
+      if (err) {
+        response.json(err);
+      } else {
+        response.json(dbResult[0]);
+      }
+    });
+//Get all products
+    } else {
+    shoppingcart.getAllShoppingCarts(function(err, dbResult) {
+      if (err) {
+        response.json(err);
+      } else {
+        response.json(dbResult);
+      }
+    });
+  }
+});
+
 //Add product to cart
 router.post('/addToCart', 
 function(request, response) {
   shoppingcart.addToCart(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
+      
     } else {
       response.json("Product added to cart.");
     }
   });
 });
 
-//Remove product from cart
-router.delete('/removeFromCart/:productId', 
+router.put('/addAmount',
 function(request, response) {
-    shoppingcart.removeFromCart(request.params.productId, function(err, dbResult) {
+    shoppingcart.addAmount(request.body, function(err, dbResult) {
+      if (err) {
+        response.json(err);
+        
+      } else {
+        response.json("Amount of product added increased by one.");
+      }
+    });
+  });
+
+//Remove product from cart
+router.put('/removeFromCart', 
+function(request, response) {
+    shoppingcart.removeFromCart(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {
-      response.json("Product removed from cart.");
+      response.json("Amount of product decreased by one.");
     }
   });
 });

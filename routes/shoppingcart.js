@@ -92,6 +92,29 @@ function(request, response) {
   });
 });
 
+router.put('/addItemToOrder',
+function(request, response) {
+    shoppingcart.addItemToOrder(request.body, function(err, dbResult) {
+      if (err) {
+        response.json(err);
+        
+      } else {
+        response.json("Amount of product added increased by one.");
+      }
+    });
+  });
+
+router.put('/removeItemFromOrder',
+function(request, response) {
+    shoppingcart.removeItemFromOrder(request.body, function(err, dbResult) {
+      if (err) {
+        response.json(err);
+        
+      } else {
+        response.json("Amount of product decreased by one.");
+      }
+    });
+  });
 
 
 

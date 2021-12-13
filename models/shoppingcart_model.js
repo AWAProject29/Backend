@@ -39,6 +39,15 @@ const shoppingcart = {
         );
       },
 
+      addItemToOrder: function(procedure_params, callback) {
+        console.log("We're in addItemToOrder function");
+        console.log(procedure_params);
+      return db.query(
+        'UPDATE shoppingcart SET cartitemamount = cartitemamount+1 WHERE idcartitem = ?;',
+        [procedure_params.idcartitem],
+        callback
+      );
+    },
 }
 
 module.exports = shoppingcart;

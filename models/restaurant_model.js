@@ -45,18 +45,6 @@ const restaurant = {
         );
     },
 
-    //Search Restaurants procedure
-    // searchRestaurant: function(procedure_params, callback){
-    //       return db.query(
-    //           'Call searchRestaurant(?)',
-    //           [procedure_params.searchstring, callback]
-    //       );
-    // },
-
-    // //Show Restaurant procedure
-    // showRestaurants: function(callback) {
-    //        return db.query('CALL showRestaurants()', callback);
-    // }
 }
 
 module.exports = restaurant;

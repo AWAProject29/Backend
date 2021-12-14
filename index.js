@@ -66,15 +66,7 @@ passport.use(new BasicStrategy(
       });
     }));
 
-// passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done){
-//   console.log('JWT is valid');
-//   console.log('payload is as follows');
-//   console.log(jwt_payload);
-
-//   done(null, jwt_payload);
-// }));
-
-
+    
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: "MyVerySecretSigningKey"

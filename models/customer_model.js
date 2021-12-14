@@ -11,13 +11,6 @@ const customer = {
         return db.query('SELECT * FROM customer', callback);
     },
 
-    // add: function(customer, callback) {
-    //     return db.query(
-    //         'insert into customer (firstname,lastname,email,password) values(?,?,?,?)',
-    //         [customer.firstname, customer.lastname, customer.email, customer.password], callback
-    //     );
-    // },
-
     delete: function(id, callback) {
         return db.query('DELETE FROM customer WHERE idcustomer=?', [id], callback);
       },

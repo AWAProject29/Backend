@@ -37,13 +37,7 @@ function(request, response) {
       console.log('Were in restaurant.add ERROR function');
       response.json(err);
     } else {
-      // console.log(request.body.restaurantimage);
-      // let sampleFile;
-      // let uploadPath;
-
-      // let restaurantImage = request.body.restaurantimage
-      // console.log(restaurantImage); 
-
+ 
       response.json("Added a restaurant.");
 
       if(!request.body || Object.keys(request.body).length === 0) {

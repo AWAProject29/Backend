@@ -10,7 +10,8 @@ var managerRouter = require('./routes/manager');
 var menuRouter = require('./routes/menu');
 var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
-var productRouter = require('./routes/product');
+var productRouter = require('./routes/product1');
+var shoppingcartRouter = require('./routes/shoppingcart');
 var path = require('path');
 
 var app = express();
@@ -130,6 +131,7 @@ app.use('/menu', menuRouter);
 app.use('/order', orderRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/product', productRouter);
+app.use('/shoppingcart', shoppingcartRouter);
 
 /////------Login Customer
 app.post('/LoginforJWTcustomer', passport.authenticate('user', { session: false }), (req, res) => {

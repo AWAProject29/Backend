@@ -21,23 +21,12 @@ const shoppingcart = {
 
       addAmount: function(procedure_params, callback) {
           console.log("We're in addAmount function");
-          console.log(procedure_params.cartitemamount);
         return db.query(
-          'UPDATE shoppingcart SET cartitemamount = cartitemamount+? WHERE idcartitem = ?;',
-          [procedure_params.cartitemamount, procedure_params.idcartitem],
+          'UPDATE shoppingcart SET cartitemamount = cartitemamount+1 WHERE idcartitem = ?;',
+          [procedure_params.idcartitem],
           callback
         );
       },
-
-      addItemToOrder: function(procedure_params, callback) {
-        console.log("We're in addAmount function");
-        console.log(procedure_params.cartitemamount);
-      return db.query(
-        'UPDATE shoppingcart SET cartitemamount = cartitemamount+1 WHERE idcartitem = ?;',
-        [procedure_params.idcartitem],
-        callback
-      );
-    },
 
       //AddProduct procedure
       removeFromCart: function(procedure_params, callback) {
@@ -49,15 +38,6 @@ const shoppingcart = {
         );
       },
 
-      addItemToOrder: function(procedure_params, callback) {
-        console.log("We're in addItemToOrder function");
-        console.log(procedure_params);
-      return db.query(
-        'UPDATE shoppingcart SET cartitemamount = cartitemamount+1 WHERE idcartitem = ?;',
-        [procedure_params.idcartitem],
-        callback
-      );
-    },
 }
 
 module.exports = shoppingcart;

@@ -73,6 +73,18 @@ function(request, response) {
   });
 });
 
+router.put('/addItemToOrder',
+function(request, response) {
+    shoppingcart.addItemToOrder(request.body, function(err, dbResult) {
+      if (err) {
+        response.json(err);
+        
+      } else {
+        response.json("Amount of product added increased by one.");
+      }
+    });
+  });
+
 
 //Update product in cart
 router.put('update/:id', 

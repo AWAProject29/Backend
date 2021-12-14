@@ -29,6 +29,16 @@ const shoppingcart = {
         );
       },
 
+      addItemToOrder: function(procedure_params, callback) {
+        console.log("We're in addAmount function");
+        console.log(procedure_params.cartitemamount);
+      return db.query(
+        'UPDATE shoppingcart SET cartitemamount = cartitemamount+1 WHERE idcartitem = ?;',
+        [procedure_params.idcartitem],
+        callback
+      );
+    },
+
       //AddProduct procedure
       removeFromCart: function(procedure_params, callback) {
         console.log("We're in removeFromCart function");

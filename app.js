@@ -10,7 +10,7 @@ var managerRouter = require('./routes/manager');
 var menuRouter = require('./routes/menu');
 var orderRouter = require('./routes/order');
 var restaurantRouter = require('./routes/restaurant');
-var productRouter = require('./routes/product1');
+var productRouter = require('./routes/product');
 var shoppingcartRouter = require('./routes/shoppingcart');
 var path = require('path');
 

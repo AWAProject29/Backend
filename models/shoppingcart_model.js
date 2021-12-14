@@ -28,7 +28,7 @@ const shoppingcart = {
         );
       },
 
-      //AddProduct procedure
+      //removeFromCart procedure
       removeFromCart: function(procedure_params, callback) {
         console.log("We're in removeFromCart function");
         return db.query(
@@ -37,6 +37,15 @@ const shoppingcart = {
           callback
         );
       },
+
+      //clearCart procedure
+      clearCart: function(procedure_params, callback) {
+        console.log("We're in clearCart function");
+        return db.query(
+            'DELETE FROM shoppingcart;',
+            callback
+          );
+        },
 
 }
 

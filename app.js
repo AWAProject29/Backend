@@ -20,7 +20,14 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 
-app.use(cors())
+var corsOptions = {
+    origin: true,
+    opstionSuccessStatus: 200,
+    credentials: true
+}
+
+app.use(cors(corsOptions));
+app.options('*', cors());
 
     // origin: "*"
     // // origin: "https://hermes-project-group-29.herokuapp.com/*",
